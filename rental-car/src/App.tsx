@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from "./pages/HomePage/HomePage";
 import CatalogPage from "./pages/CatalogPage/CatalogPage";
 import CarDetailsPage from "./pages/CarDetailsPage/CarDetailsPage";
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
 
       <Route path="/catalog/:id" element={<CarDetailsPage />} />
 
-      <Route path="*" element={<Navigate to='/'/>} />
+      <Route path="/favorites" element={<FavoritesPage />} />
+
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

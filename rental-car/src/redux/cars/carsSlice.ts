@@ -20,6 +20,13 @@ export interface Car {
   mileage: number;
 }
 
+interface FetchCarsResponse {
+  cars: Car[];
+  totalCars: number;
+  page: number;
+  totalPages: number;
+}
+
 interface CarsState {
   items: Car[];
   isLoading: boolean;
@@ -38,18 +45,21 @@ const initialState: CarsState = {
   totalPages: 0,
 };
 
-interface FetchCarsResponse {
-  cars: Car[];
-  totalCars: number;
-  page: number;
-  totalPages: number;
-}
-
-export const fetchCars = createAsyncThunk<FetchCarsResponse>(
+export const fetchCars = createAsyncThunk<FetchCarsResponse, number>(
   "cars/fetchCars",
-  async () => {
+  async (page = 1) => {
     const response = await axios.get<FetchCarsResponse>(
-      "https://car-rental-api.goit.global/cars"
+      `https://car-rental-api.goit.global/cars?page=${page}&limit=12`
+    );
+    return response.data;
+  }
+);
+
+export const loadMoreCars = createAsyncThunk<FetchCarsResponse, number>(
+  "cars/loadMoreCars",
+  async (page) => {
+    const response = await axios.get<FetchCarsResponse>(
+      `https://car-rental-api.goit.global/cars?page=${page}&limit=12`
     );
     return response.data;
   }
@@ -61,6 +71,7 @@ const carsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
       .addCase(fetchCars.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -73,6 +84,22 @@ const carsSlice = createSlice({
         state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchCars.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || "Something went wrong";
+      })
+
+      .addCase(loadMoreCars.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loadMoreCars.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = [...state.items, ...action.payload.cars];
+        state.page = action.payload.page;
+        state.totalCars = action.payload.totalCars;
+        state.totalPages = action.payload.totalPages;
+      })
+      .addCase(loadMoreCars.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message || "Something went wrong";
       });

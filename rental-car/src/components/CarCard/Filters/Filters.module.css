@@ -1,0 +1,67 @@
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .filters > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 200px;
+  }
+  
+  .filters label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333;
+  }
+  
+  .filters select,
+  .filters input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+  }
+  
+  .filters select:focus,
+  .filters input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .mileage {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .mileage input {
+    flex: 1;
+  }
+  
+  .filters button {
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .filters button:hover {
+    background-color: #0056b3;
+  }
+  

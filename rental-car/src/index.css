@@ -1,0 +1,50 @@
+
+:root {
+    --font-family: "Manrope", sans-serif;
+    --second-family: "Inter", sans-serif;
+  }:root {
+	--main: #101828;
+	--gray: #8d929a;
+	--gray-light: #dadde1;
+	--badges: #f2f4f7;
+	--inputs: #f7f7f7;
+	--white: #fff;
+	--button: #3470ff;
+	--button-hover: #0b44cd;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+.container {
+    max-width: 1440px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 0 auto;
+  }
+  

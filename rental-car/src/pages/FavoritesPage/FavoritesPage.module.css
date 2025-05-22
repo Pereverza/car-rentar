@@ -1,0 +1,23 @@
+.favoritesPage {
+    padding: 40px;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+  
+  .empty {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+  }
+  
+  .cardList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+  }
+  
