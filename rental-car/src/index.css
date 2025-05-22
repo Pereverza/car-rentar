@@ -12,6 +12,9 @@
 	--button: #3470ff;
 	--button-hover: #0b44cd;
 }
+body {
+  font-family: "Manrope", sans-serif;
+}
 h1,
 h2,
 h3,

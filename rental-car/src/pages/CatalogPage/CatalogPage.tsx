@@ -25,7 +25,7 @@ const CatalogPage = () => {
 
   return (
     <div className={s.catalogPage}>
-      <h1 className={s.title}>Catalog</h1>
+      <h1 className={s.title}></h1>
 
       <Filters
         brands={brands}

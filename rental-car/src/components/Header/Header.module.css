@@ -1,0 +1,38 @@
+.header {
+    z-index: 10;
+    padding: 20px 120px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-bottom: 1px solid var(--badges);
+    background: var(--badges);
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #101828;
+  }
+  
+  .logo span {
+    color: #4e6ef1;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 32px;
+  }
+  
+  .navLink {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    text-align: center;
+    color: #101828;
+  }
+  .navLink:hover{
+    color: #3470FF;
+  }

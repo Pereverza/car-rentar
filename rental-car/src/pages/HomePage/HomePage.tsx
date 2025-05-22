@@ -1,22 +1,10 @@
+
 import { Link } from "react-router-dom";
 import s from "./HomePage.module.css";
 
 const HomePage = () => {
   return (
     <div className={s.homeWrapper}>
-      <header className={s.header}>
-        <div className={s.logo}>
-          Rental<span>Car</span>
-        </div>
-        <nav className={s.nav}>
-          <Link to="/" className={s.navLink}>
-            Home
-          </Link>
-          <Link to="/catalog" className={s.navLink}>
-            Catalog
-          </Link>
-        </nav>
-      </header>
 
       <section className={s.hero}>
         <div className={s.overlay}>
@@ -34,3 +22,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

@@ -27,7 +27,7 @@ const Filters = ({ onFilter, brands }: Props) => {
   return (
     <form className={s.filters} onSubmit={handleSubmit}>
       <div>
-        <label>Car brand</label>
+        <label className={s.brend}>Car brand</label>
         <select value={make} onChange={(e) => setMake(e.target.value)}>
           <option value="">Choose a brand</option>
           {brands.map((b) => (
@@ -39,7 +39,7 @@ const Filters = ({ onFilter, brands }: Props) => {
       </div>
 
       <div>
-        <label>Price / 1 hour</label>
+        <label className={s.price}>Price / 1 hour</label>
         <select value={price} onChange={(e) => setPrice(e.target.value)}>
           <option value="">Choose a price</option>
           {prices.map((p) => (
@@ -51,19 +51,22 @@ const Filters = ({ onFilter, brands }: Props) => {
       </div>
 
       <div>
-        <label>Car mileage / km</label>
+        <label className={s.label}>Car mileage / km</label>
         <div className={s.mileage}>
           <input
             type="number"
             placeholder="From"
             value={mileageFrom}
             onChange={(e) => setMileageFrom(e.target.value)}
+            className={s.input}
           />
+          <div className={s.divider}></div>
           <input
             type="number"
             placeholder="To"
             value={mileageTo}
             onChange={(e) => setMileageTo(e.target.value)}
+            className={s.input}
           />
         </div>
       </div>
