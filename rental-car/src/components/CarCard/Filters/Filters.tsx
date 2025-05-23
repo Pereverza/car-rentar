@@ -50,9 +50,9 @@ const Filters = ({ onFilter, brands }: Props) => {
         </select>
       </div>
 
-      <div>
+      <div className={s.mileageFrom}>
         <label className={s.label}>Car mileage / km</label>
-        <div className={s.mileage}>
+        <div className={s.mileageBox}>
           <input
             type="number"
             placeholder="From"

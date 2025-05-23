@@ -27,13 +27,6 @@ const Header = () => {
         >
           Catalog
         </Link>
-        <Link
-          to="/favorites"
-          className={`${s.navLink} ${
-            location.pathname === "/favorites" ? s.active : ""
-          }`}
-        >
-        </Link>
       </nav>
     </header>
   );

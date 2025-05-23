@@ -1,4 +1,5 @@
 .carCard {
+  position: relative;
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -79,4 +80,16 @@
   .favoriteButton:hover {
     transform: scale(1.2);
   }
+  
+  .heartActive {
+    color: #3470ff !important;
+    transition: color 0.2s ease;
+  }
+  
+  .heartDefault {
+    color: #111827 !important;
+    transition: color 0.2s ease;
+  }
+  
+  
   

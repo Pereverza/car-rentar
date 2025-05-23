@@ -3,14 +3,14 @@ import type { Car } from "../../redux/cars/carsSlice";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../redux/cars/favoritesSlice";
-import { Heart } from "lucide-react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import s from "./CarCard.module.css";
 import { createSelector } from "@reduxjs/toolkit";
 import { store } from "../../redux/store";
 
 const selectFavorites = createSelector(
   [(state: ReturnType<typeof store.getState>) => state.favorites],
-  (favorites): string[] => Array.isArray(favorites) ? [...favorites] : []// уникаємо warning — повертаємо новий масив
+  (favorites): string[] => (Array.isArray(favorites) ? [...favorites] : [])
 );
 
 interface CarCardProps {
@@ -29,7 +29,11 @@ const CarCard: FC<CarCardProps> = ({ car }) => {
         onClick={() => dispatch(toggleFavorite(car.id))}
         aria-label="Add to favorites"
       >
-        {isFavorite ? <Heart fill="#f00" color="#f00" /> : <Heart />}
+        {isFavorite ? (
+          <AiFillHeart size={24} className={s.heartActive} />
+        ) : (
+          <AiOutlineHeart size={24} className={s.heartDefault} />
+        )}
       </button>
 
       <img
