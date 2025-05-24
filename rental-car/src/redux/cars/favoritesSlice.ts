@@ -19,14 +19,11 @@ const favoritesSlice = createSlice({
   reducers: {
     toggleFavorite(state, action: PayloadAction<string>) {
       const id = action.payload;
-      const index = state.indexOf(id);
-
-      if (index === -1) {
-        state.push(id);
-      } else {
-        state.splice(index, 1);
-      }
-      localStorage.setItem("favorites", JSON.stringify([...state]));
+      const newState = state.includes(id)
+        ? state.filter((item) => item !== id)
+        : [...state, id];
+      localStorage.setItem("favorites", JSON.stringify(newState));
+      return newState;
     },
   },
 });

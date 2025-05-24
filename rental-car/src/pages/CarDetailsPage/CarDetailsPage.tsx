@@ -1,6 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
+import BookingForm from "../../components/BookingForm/BookingForm";
+import { formatCarId } from "../../utils/formatCarId";
+
+// Іконки
+import { BsCheckCircle, BsGear } from "react-icons/bs";
+import { HiLocationMarker } from "react-icons/hi";
+import { CiCalendarDate } from "react-icons/ci";
+import { TbCar } from "react-icons/tb";
+import { FaGasPump } from "react-icons/fa"; // ← заміна для fuel
+
 import s from "./CarDetailsPage.module.css";
 
 const CarDetailsPage = () => {
@@ -20,62 +30,99 @@ const CarDetailsPage = () => {
   }
 
   return (
-    <div className={s.details}>
-      <h1>
-        {car.brand} {car.model} ({car.year})
-      </h1>
-      <img
-        src={car.img}
-        alt={`${car.brand} ${car.model}`}
-        className={s.image}
-      />
+    <div className={s.detailsWrapper}>
+      <div className={s.leftColumn}>
+        <img
+          src={car.img}
+          alt={`${car.brand} ${car.model}`}
+          className={s.image}
+        />
+        <BookingForm />
+      </div>
 
-      <div className={s.info}>
-        <p>
-          <strong>Type:</strong> {car.type}
-        </p>
-        <p>
-          <strong>Engine:</strong> {car.engineSize}
-        </p>
-        <p>
-          <strong>Fuel consumption:</strong> {car.fuelConsumption}
-        </p>
-        <p>
-          <strong>Mileage:</strong> {car.mileage.toLocaleString()} km
-        </p>
-        <p>
-          <strong>Rental price:</strong> ${car.rentalPrice}
-        </p>
-        <p>
-          <strong>Rental company:</strong> {car.rentalCompany}
-        </p>
-        <p>
-          <strong>Address:</strong> {car.address}
-        </p>
-        <p className={s.description}>{car.description}</p>
+      <div className={s.rightColumn}>
+        <div className={s.infoBlock}>
+          <div className={s.titleBlock}>
+            <h1 className={s.title}>
+              {car.brand} {car.model}, {car.year}
+            </h1>
+            <span className={s.carId}>{formatCarId(car.id)}</span>
+          </div>
 
-        <h3>Accessories</h3>
-        <ul>
-          {car.accessories.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+          <div className={s.locationWrapper}>
+            <div className={s.locationBlock}>
+              <HiLocationMarker className={s.icon} />
+              <span>
+                {car.address.split(",")[1]?.trim()},{" "}
+                {car.address.split(",")[2]?.trim()}
+              </span>
+            </div>
+            <div className={s.mileageBlock}>
+              Mileage: {car.mileage.toLocaleString("en-US")} km
+            </div>
+          </div>
 
-        <h3>Functionalities</h3>
-        <ul>
-          {car.functionalities.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+          <p className={s.price}>${car.rentalPrice}</p>
 
-        <h3>Rental Conditions</h3>
-        <ul>
-          {car.rentalConditions.map((cond, i) => (
-            <li key={i}>{cond}</li>
-          ))}
-        </ul>
+          <p className={s.description}>
+            {car.description ||
+              "A modern and comfortable car ideal for trips and city driving."}
+          </p>
 
-        <button className={s.button}>Rent now</button>
+          <div className={s.infoSectionWrapper}>
+            {/* Rental Conditions */}
+            <div className={s.sectionBlock}>
+              <h3 className={s.sectionTitle}>Rental Conditions:</h3>
+              <ul className={s.sectionGridList}>
+                {car.rentalConditions.map((cond, i) => (
+                  <li key={i} className={s.sectionItem}>
+                    <BsCheckCircle className={s.checkIcon} />
+                    {cond}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Car Specifications */}
+            <div className={s.sectionBlock}>
+              <h3 className={s.sectionTitle}>Car Specifications:</h3>
+              <ul className={s.sectionGridList}>
+                <li className={s.sectionItem}>
+                  <CiCalendarDate className={s.specIcon} />
+                  Year: {car.year}
+                </li>
+                <li className={s.sectionItem}>
+                  <TbCar className={s.specIcon} />
+                  Type: {car.type}
+                </li>
+                <li className={s.sectionItem}>
+                  <FaGasPump className={s.specIcon} />
+                  Fuel Consumption: {car.fuelConsumption}
+                </li>
+                <li className={s.sectionItem}>
+                  <BsGear className={s.specIcon} />
+                  Engine Size: {car.engineSize}
+                </li>
+              </ul>
+            </div>
+
+            {/* Accessories and Functionalities */}
+            <div className={s.sectionBlock}>
+              <h3 className={s.sectionTitle}>
+                Accessories and functionalities:
+              </h3>
+              <ul className={s.sectionGridList}>
+                {[...car.accessories, ...car.functionalities].map((item, i) => (
+                  <li key={i} className={s.sectionItem}>
+                    <BsCheckCircle className={s.checkIcon} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <Link to="/catalog" className={s.backLink}>
           ← Back to catalog
         </Link>

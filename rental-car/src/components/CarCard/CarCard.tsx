@@ -3,15 +3,9 @@ import type { Car } from "../../redux/cars/carsSlice";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../redux/cars/favoritesSlice";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import HeartIcon from "../../components/HeartIcon/HeartIcon";
 import s from "./CarCard.module.css";
-import { createSelector } from "@reduxjs/toolkit";
 import { store } from "../../redux/store";
-
-const selectFavorites = createSelector(
-  [(state: ReturnType<typeof store.getState>) => state.favorites],
-  (favorites): string[] => (Array.isArray(favorites) ? [...favorites] : [])
-);
 
 interface CarCardProps {
   car: Car;
@@ -19,7 +13,9 @@ interface CarCardProps {
 
 const CarCard: FC<CarCardProps> = ({ car }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavorites);
+  const favorites = useSelector(
+    (state: ReturnType<typeof store.getState>) => state.favorites
+  );
   const isFavorite = favorites.includes(car.id);
 
   return (
@@ -29,11 +25,7 @@ const CarCard: FC<CarCardProps> = ({ car }) => {
         onClick={() => dispatch(toggleFavorite(car.id))}
         aria-label="Add to favorites"
       >
-        {isFavorite ? (
-          <AiFillHeart size={24} className={s.heartActive} />
-        ) : (
-          <AiOutlineHeart size={24} className={s.heartDefault} />
-        )}
+        <HeartIcon active={isFavorite} size={16} />
       </button>
 
       <img
@@ -43,12 +35,25 @@ const CarCard: FC<CarCardProps> = ({ car }) => {
       />
 
       <div className={s.carInfo}>
-        <h2 className={s.carTitle}>
-          {car.brand} {car.model}, {car.year}
-        </h2>
+        <div className={s.carTitle}>
+          <div>
+            <span className={s.brand}>{car.brand}</span>{" "}
+            <Link to={`/catalog/${car.id}`} className={s.modelLink}>
+              {car.model}
+            </Link>
+            , {car.year}
+          </div>
+          <span className={s.carPrice}>${car.rentalPrice}</span>
+        </div>
 
-        <p className={s.carPrice}>Rental price: ${car.rentalPrice}</p>
-        <p className={s.carDescription}>{car.description}</p>
+        <p className={s.carLocation}>
+          {car.address.split(",")[1]?.trim()} |{" "}
+          {car.address.split(",")[2]?.trim()} | {car.rentalCompany}
+        </p>
+
+        <p className={s.carDetails}>
+          {car.type} | {car.mileage.toLocaleString("en-US")} km
+        </p>
 
         <Link to={`/catalog/${car.id}`} className={s.carButton}>
           Read more

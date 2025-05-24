@@ -1,0 +1,58 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 108px 32px 24px 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+max-height: 488px;
+  }
+  
+  .form input,
+  .form textarea {
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+    resize: vertical;
+    background-color: #f7f7f7;
+  }
+  textarea {
+    margin-bottom: 24px;
+
+
+    border-radius: 12px;
+padding: 12px 20px 56px 20px;
+width: 576px;
+height: 88px;
+  }
+  .form input::placeholder,
+  .form textarea::placeholder {
+    color: #9ca3af;
+  }
+  
+  .form button {
+    padding: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3470ff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success {
+    color: #2ecc71;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  
